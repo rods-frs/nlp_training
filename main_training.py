@@ -13,12 +13,88 @@ def open_csv(path):
     with open(path, newline="") as f: 
         return list(csv.DictReader(f))
 
+#NER Training
+
+def b_ner_model(ner_label):
+    nlp = spacy.blank("en")
+    ner = nlp.add_pipe("ner")
+    ner.add_label(ner_label)
+    return nlp
+
+def ner_treat_td(reader):
+    master_list = []
+    for row in reader:
+        phrase = row["phrase"]
+        p_name = row["pname"]
+
+        ph_len = len(p_name)
+        p_start = phrase.find(p_name)
+        p_end = ph_len + p_start
+
+        master_list.append(
+            (phrase, {"entities": [(p_start, p_end, "PROGRAM")]})
+        )
+    return master_list
+
+def ner_training(nlp, int_range, TRAIN_DATA):
+
+    # 5. Initialize the model
+    nlp.initialize()
+
+    perc = 100 / int_range
+    
+    current_perc = 0
+
+    # 6. Training loop
+    for i in range(int_range):  # small number of iterations for demo
+        losses = {}
+        for text, annotations in TRAIN_DATA:
+            example = Example.from_dict(nlp.make_doc(text), annotations)
+            nlp.update([example], losses=losses)
+        display_perc = int(current_perc)
+        system("clear")
+        print(f"Training {display_perc}% completed")
+        current_perc += perc
+    
+    print("Training completed!")
+    return nlp
+
+def ner_test(nlp, t_csv, ):
+    failures = 0
+    fail_name = []
+    success = 0
+    suc_name = []
+    row_counter = 0
+
+    reader = open_csv(t_csv)
+    for row in reader:
+        row_counter += 1
+        phrase = row["phrase"]
+        p_name = row["name"]
+        doc = nlp(phrase)
+        for ent in doc.ents:
+            if ent.text != p_name:
+                failures += 1
+                fail_name.append(p_name)
+            elif ent.text == p_name:
+                success += 1
+                suc_name.append(p_name)
+    for row in reader:
+        p_name = row["name"]
+        if p_name not in suc_name:
+            fail_name.append(p_name)
+    print("=" * 10)
+    total_rows = success + failures
+
+    return failures, fail_name, success, suc_name, total_rows, row_counter
+
+
 #CAT training
 
 def cat_analytics():
     pass
 
-def c_cat_model(it, n_it):
+def b_cat_model(it, n_it):
     nlp = spacy.blank("en")
     textcat = nlp.add_pipe("textcat")
     textcat.add_label(it)
@@ -82,22 +158,59 @@ def b_check_cat_nlp(intention, trained_nlp, t_text, f_text):
 
 #testing
 
-it1 = "update"
-n_it1 = "n_update"
-interations = 200
-intention = "update"
-t_text = "please update my computer"
-f_text = "what date is today?"
+def testing1():
+    it1 = "update"
+    n_it1 = "n_update"
+    interations = 200
+    intention = "update"
+    t_text = "please update my computer"
+    f_text = "what date is today?"
 
-b_nlp = c_cat_model(it1, n_it1)
+    b_nlp = b_cat_model(it1, n_it1)
 
-reader = open_csv("/home/morsdesuper/Documents/GitHub/nlp_training/update_t_data.csv")
+    reader = open_csv("/home/morsdesuper/Documents/GitHub/nlp_training/update_t_data.csv")
 
-cat_td = cat_get_td(it1, n_it1, reader)
+    cat_td = cat_get_td(it1, n_it1, reader)
 
-trained_nlp = cat_training(b_nlp, cat_td, interations)
+    trained_nlp = cat_training(b_nlp, cat_td, interations)
 
-t_prob, test1, f_prob, test2 = b_check_cat_nlp(intention, trained_nlp, t_text, f_text)
+    t_prob, test1, f_prob, test2 = b_check_cat_nlp(intention, trained_nlp, t_text, f_text)
 
-print(t_prob, test1, f_prob, test2)
+    print(t_prob, test1, f_prob, test2)
 
+def ner_main(label, csv_path, t_csv, n_int):
+
+    b_nlp = b_ner_model(label)
+
+    reader = open_csv(csv_path)
+
+    ner_training_data = ner_treat_td(reader)
+
+    t_nlp = ner_training(b_nlp, n_int, ner_training_data)
+
+    failures, fail_name, success, suc_name, total_rows, row_counter = ner_test(t_nlp, t_csv)
+
+    if failures > 0:
+        print(f"{failures} programs from the testing CSV where not recognized")
+        print(f"This programs where: ")
+        for name in fail_name:
+            print(name)
+        
+        while True:
+            ex_option = str(input("Would you like to export the trained NLP? ")).lower()
+            if ex_option == "yes":
+                nlp_name = input("Whats the name of the NLP? ")
+                t_nlp.to_disk(nlp_name)
+                break
+            elif ex_option == "no":
+                print("Sure thing, exiting...")
+                break
+            else:
+                print(f"{ex_option} is not a known command... ")
+
+    else: t_nlp.to_disk("SUCCESS_NLP001")
+
+if __name__ == "__main__":
+    ner_main("PROGRAM", "/home/morsdesuper/Documents/GitHub/nlp_training/program_phrases_mixed.csv", "csv.csv", 250)
+
+    
