@@ -10,6 +10,7 @@ import random
 #main functions
 
 def open_csv(path):
+    print(path)
     with open(path, newline="") as f: 
         return list(csv.DictReader(f))
 
@@ -142,41 +143,38 @@ def b_check_cat_nlp(intention, trained_nlp, t_text, f_text):
         doc = trained_nlp(t_text)
         t_it_prob1 = doc.cats[intention]
         if t_it_prob1 > 0.5:
-            test1 = True
+            test1 = "Passed"
         else:
-            test1 = False
+            test1 = "Failed"
         
         #False phrase verification
-        doc = trained_nlp(t_text)
+        doc = trained_nlp(f_text)
         f_it_prob1 = doc.cats[intention]
         if f_it_prob1 > 0.5:
-            test2 = False
+            test2 = "Failed"
         else:
-            test2 = True
+            test2 = "Passed"
     
     return t_it_prob1, test1, f_it_prob1, test2
 
 #testing
 
-def testing1():
-    it1 = "update"
-    n_it1 = "n_update"
-    interations = 200
-    intention = "update"
-    t_text = "please update my computer"
-    f_text = "what date is today?"
+def testing1(it1, n_it1, interations, t_text, f_text, cat_csv_path):
 
     b_nlp = b_cat_model(it1, n_it1)
 
-    reader = open_csv("/home/morsdesuper/Documents/GitHub/nlp_training/update_t_data.csv")
+    reader = open_csv(cat_csv_path)
 
     cat_td = cat_get_td(it1, n_it1, reader)
 
     trained_nlp = cat_training(b_nlp, cat_td, interations)
 
-    t_prob, test1, f_prob, test2 = b_check_cat_nlp(intention, trained_nlp, t_text, f_text)
+    t_prob, test1, f_prob, test2 = b_check_cat_nlp(it1, trained_nlp, t_text, f_text)
 
-    print(t_prob, test1, f_prob, test2)
+    print(f"True phrase test: {test1} with the prob being: {t_prob} | False phrase test: {test2} with the prob being: {f_prob} ")
+    
+    input("Press ENTER to save the model as 'open_program_model'")
+    trained_nlp.to_disk("open_program_model")
 
 def ner_main(label, csv_path, t_csv, n_int):
 
@@ -211,6 +209,7 @@ def ner_main(label, csv_path, t_csv, n_int):
     else: t_nlp.to_disk("SUCCESS_NLP001")
 
 if __name__ == "__main__":
-    ner_main("PROGRAM", "/home/morsdesuper/Documents/GitHub/nlp_training/program_phrases_mixed.csv", "csv.csv", 250)
+    #ner_main("PROGRAM", "/home/morsdesuper/Documents/GitHub/nlp_training/program_phrases_mixed.csv", "csv.csv", 250)
+    testing1("open_program", "not_open_program", 250, "Could you please open up Word?", "What time is it?", "/home/morsdesuper/Documents/GitHub/nlp_training/update_t_data.csv")
 
     
