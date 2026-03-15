@@ -1,0 +1,615 @@
+phrase,intention,score
+Resume my music on Spotify,resume_music,1
+Go to the next track please,next_track,1
+Pause the music for a second,pause_music,1
+Turn shuffle on please,shuffle,1
+Enable repeat mode on Spotify,repeat,1
+What song is playing right now?,get_current_music,1
+The sky looks really clear today,none,0
+Get my music going again,resume_music,1
+Skip to the next song,next_track,1
+Stop the music for a second,pause_music,1
+Put my music on shuffle,shuffle,1
+Loop this song please,repeat,1
+What's the current track on Spotify?,get_current_music,1
+I need to do laundry this evening,none,0
+Continue playing my Spotify,resume_music,1
+Play the next track,next_track,1
+Pause Spotify for me,pause_music,1
+Can you shuffle my playlist?,shuffle,1
+Set Spotify to repeat,repeat,1
+What music is on right now?,get_current_music,1
+My coffee went cold already,none,0
+Unpause the music please,resume_music,1
+Next song on Spotify,next_track,1
+Hold the music please,pause_music,1
+Enable shuffle mode on Spotify,shuffle,1
+Repeat the current track,repeat,1
+Tell me what song this is,get_current_music,1
+I forgot to water my plants again,none,0
+Start my music back up,resume_music,1
+Skip this song please,next_track,1
+Can you pause what's playing?,pause_music,1
+Shuffle my Spotify please,shuffle,1
+Turn on loop mode on Spotify,repeat,1
+What's playing on Spotify?,get_current_music,1
+The bus was late this morning,none,0
+Resume playback on Spotify,resume_music,1
+Move to the next song on my playlist,next_track,1
+Stop playback on Spotify,pause_music,1
+Turn on shuffle for my music,shuffle,1
+Keep repeating this song,repeat,1
+Which song is currently on?,get_current_music,1
+I can't find my charger anywhere,none,0
+Pick up where my music left off,resume_music,1
+I don't like this song skip it,next_track,1
+Pause the song please,pause_music,1
+Play my songs in random order,shuffle,1
+Enable song repeat on Spotify,repeat,1
+What track is Spotify playing?,get_current_music,1
+My neighbor keeps parking in my spot,none,0
+Play my Spotify again,resume_music,1
+Next track on Spotify,next_track,1
+Hold on the music for now,pause_music,1
+Activate shuffle on Spotify,shuffle,1
+Loop the current song please,repeat,1
+Can you tell me what song is on?,get_current_music,1
+I have a dentist appointment tomorrow,none,0
+Resume the track I was listening to,resume_music,1
+Can you go to the next song?,next_track,1
+Pause the current track,pause_music,1
+Randomize my playlist please,shuffle,1
+Turn on repeat for my music,repeat,1
+What's the name of this song?,get_current_music,1
+The new bakery downtown smells amazing,none,0
+Get Spotify playing again,resume_music,1
+Jump to the next track please,next_track,1
+Can you stop the music temporarily?,pause_music,1
+Shuffle my music queue,shuffle,1
+Loop my current Spotify track,repeat,1
+What song am I listening to right now?,get_current_music,1
+I lost my umbrella somewhere,none,0
+Continue my Spotify session,resume_music,1
+Skip this track and play the next,next_track,1
+Pause playback please,pause_music,1
+Enable shuffle for my Spotify,shuffle,1
+Activate repeat mode please,repeat,1
+Which track is currently playing?,get_current_music,1
+There's a spider in my bathroom,none,0
+Hit play on my paused Spotify,resume_music,1
+Play the following song on Spotify,next_track,1
+Hold my music for a bit,pause_music,1
+Play my playlist in shuffle mode,shuffle,1
+Keep this song on repeat,repeat,1
+What's the current song on Spotify?,get_current_music,1
+I really need a vacation,none,0
+Resume what I had on,resume_music,1
+Forward to the next song,next_track,1
+Stop Spotify right now,pause_music,1
+Turn shuffle mode on Spotify,shuffle,1
+Repeat this track on Spotify,repeat,1
+Tell me what's playing please,get_current_music,1
+My laptop battery drains so fast,none,0
+Start playing my Spotify again,resume_music,1
+Move on to the next track,next_track,1
+Pause the music I'm listening to,pause_music,1
+Randomize my songs please,shuffle,1
+Set this song to loop,repeat,1
+What music am I listening to right now?,get_current_music,1
+I spilled juice on my keyboard,none,0
+Continue the song on Spotify,resume_music,1
+Change to the next song,next_track,1
+Can you pause Spotify?,pause_music,1
+Switch Spotify to shuffle mode,shuffle,1
+Keep this track on repeat,repeat,1
+Which song is on right now?,get_current_music,1
+The gym was super crowded today,none,0
+Put my music back on please,resume_music,1
+I want to hear the next song,next_track,1
+Stop the track for a moment,pause_music,1
+Mix up my songs on Spotify,shuffle,1
+Activate loop on the current song,repeat,1
+What is this song on Spotify?,get_current_music,1
+I keep forgetting to reply to emails,none,0
+Resume my Spotify queue,resume_music,1
+Skip to next track on Spotify,next_track,1
+Pause what's playing on Spotify,pause_music,1
+Put Spotify on shuffle please,shuffle,1
+Repeat mode on please,repeat,1
+Tell me the current song please,get_current_music,1
+My phone storage is almost full,none,0
+Play music from where I stopped,resume_music,1
+Play the song after this one,next_track,1
+Hold my Spotify for now,pause_music,1
+Shuffle my current playlist,shuffle,1
+Turn on repeat for this song,repeat,1
+What's this song that's playing?,get_current_music,1
+I need a new pair of shoes,none,0
+Get my playlist going again,resume_music,1
+Go ahead to the next track,next_track,1
+Stop music playback please,pause_music,1
+Activate random mode on Spotify,shuffle,1
+Loop this track for me,repeat,1
+Which track am I on right now?,get_current_music,1
+The weather has been so unpredictable lately,none,0
+Resume my current Spotify track,resume_music,1
+Switch to the next song please,next_track,1
+Pause my music for now,pause_music,1
+Shuffle play my Spotify,shuffle,1
+Enable repeat playback on Spotify,repeat,1
+Can you show me the current song on Spotify?,get_current_music,1
+I have so many unread notifications,none,0
+Keep my Spotify going,resume_music,1
+Skip this one on Spotify,next_track,1
+Pause playback on Spotify,pause_music,1
+Enable shuffle mode please,shuffle,1
+Turn looping on for the current song,repeat,1
+What is playing on Spotify at the moment?,get_current_music,1
+My glasses got scratched this morning,none,0
+Continue playing what I had on Spotify,resume_music,1
+Next one on Spotify please,next_track,1
+Pause the track on Spotify,pause_music,1
+Turn on shuffle for my playlist,shuffle,1
+Set my song to loop on Spotify,repeat,1
+Which song is Spotify playing for me?,get_current_music,1
+I think the milk in the fridge is expired,none,0
+Unpause Spotify for me,resume_music,1
+Play the next one in my playlist,next_track,1
+Stop what's playing for a moment,pause_music,1
+Randomize my Spotify playlist please,shuffle,1
+Keep repeating the track I'm on,repeat,1
+Tell me the name of the current track,get_current_music,1
+The traffic on the highway was awful,none,0
+Resume the album I was on,resume_music,1
+Skip ahead on Spotify,next_track,1
+Pause my current song,pause_music,1
+Shuffle the tracks on my Spotify,shuffle,1
+Set repeat mode on Spotify,repeat,1
+What's playing on my Spotify right now?,get_current_music,1
+I need to take my car in for service,none,0
+Play what I had paused on Spotify,resume_music,1
+Next track please,next_track,1
+Hold on the track please,pause_music,1
+Turn on shuffle for Spotify,shuffle,1
+Turn on repeat mode please,repeat,1
+Identify the song that's on right now,get_current_music,1
+My back has been hurting from this chair,none,0
+Start my music up again please,resume_music,1
+Change the song to the next one,next_track,1
+Stop the current track on Spotify,pause_music,1
+Enable random playback on Spotify,shuffle,1
+Repeat this song for me please,repeat,1
+What track is currently on?,get_current_music,1
+I haven't been sleeping well this week,none,0
+Get the music back on Spotify,resume_music,1
+Can you skip this song?,next_track,1
+Pause music for a second,pause_music,1
+Shuffle my Spotify queue please,shuffle,1
+Set loop mode on Spotify,repeat,1
+Can you tell me the current Spotify track?,get_current_music,1
+The elevator in my building is broken,none,0
+Resume where the music left off,resume_music,1
+Move to the next one on Spotify,next_track,1
+Stop my Spotify music please,pause_music,1
+Mix my music up on Spotify,shuffle,1
+Enable song looping on Spotify,repeat,1
+What music is currently on Spotify?,get_current_music,1
+I forgot to buy milk at the store,none,0
+Continue the playlist on Spotify please,resume_music,1
+Play the next track on my Spotify,next_track,1
+Can you hold the music for a moment?,pause_music,1
+Can you put Spotify on random?,shuffle,1
+Loop this song on Spotify please,repeat,1
+Which song is currently on my Spotify?,get_current_music,1
+My internet has been really slow lately,none,0
+Play my Spotify back please,resume_music,1
+Skip to the following track,next_track,1
+Pause what's on Spotify,pause_music,1
+Start playing my songs randomly on Spotify,shuffle,1
+Repeat this track indefinitely,repeat,1
+What is the song that's on right now?,get_current_music,1
+I need to clean my apartment this weekend,none,0
+Resume Spotify for me,resume_music,1
+Jump to the following song on Spotify,next_track,1
+Stop my music please,pause_music,1
+Shuffle everything in my playlist,shuffle,1
+Turn on repeat for my current track,repeat,1
+Tell me what track is playing right now,get_current_music,1
+The bookstore near me is closing down,none,0
+Start the music on Spotify again,resume_music,1
+Go ahead and skip this song,next_track,1
+Pause the music temporarily,pause_music,1
+Enable shuffle on my music please,shuffle,1
+Keep replaying this track on Spotify,repeat,1
+What song is currently on Spotify?,get_current_music,1
+I left my umbrella on the train,none,0
+Unpause and play my Spotify,resume_music,1
+Next track now on Spotify,next_track,1
+Pause the music for now,pause_music,1
+Randomize my music on Spotify,shuffle,1
+Enable repeat on the current song,repeat,1
+What's the song on Spotify right now?,get_current_music,1
+I should probably go to bed earlier,none,0
+Let Spotify continue please,resume_music,1
+Move on to the next song please,next_track,1
+Stop the song on Spotify,pause_music,1
+Put shuffle on for my Spotify please,shuffle,1
+Set this track to repeat on Spotify,repeat,1
+Which song is currently playing on Spotify?,get_current_music,1
+My houseplant keeps drooping,none,0
+Get Spotify back on please,resume_music,1
+Skip this and go to the next,next_track,1
+Pause my Spotify please,pause_music,1
+Shuffle my Spotify playlist,shuffle,1
+Repeat the song I'm listening to,repeat,1
+What song are we listening to right now?,get_current_music,1
+I have a meeting in ten minutes,none,0
+Resume my Spotify right now,resume_music,1
+Play the next song in my queue,next_track,1
+Hold the current track please,pause_music,1
+Can you shuffle my Spotify music?,shuffle,1
+Keep replaying this song please,repeat,1
+What's currently playing on my Spotify?,get_current_music,1
+I can't remember where I put my keys,none,0
+Pick the music back up on Spotify,resume_music,1
+Next song please,next_track,1
+Pause my Spotify right now,pause_music,1
+Turn shuffle on now,shuffle,1
+Loop this one on Spotify,repeat,1
+Tell me what's on Spotify right now,get_current_music,1
+The new coffee shop is great but pricey,none,0
+Continue my listening session,resume_music,1
+Skip to next song on my playlist,next_track,1
+Stop playing music on Spotify,pause_music,1
+Shuffle my music please,shuffle,1
+Enable repeat for this track,repeat,1
+What song is this on Spotify?,get_current_music,1
+My phone case cracked yesterday,none,0
+I want to continue my Spotify session,resume_music,1
+Move on to the next track on Spotify,next_track,1
+Pause the Spotify track,pause_music,1
+Shuffle the playlist on Spotify,shuffle,1
+Turn on song repeat on Spotify,repeat,1
+What's the track that's playing?,get_current_music,1
+I need to buy a birthday gift soon,none,0
+Hit play to resume my music,resume_music,1
+Skip this song and go to the next,next_track,1
+Hold the song please,pause_music,1
+Enable shuffle for my Spotify please,shuffle,1
+Activate repeat for this track,repeat,1
+Can you identify the current song?,get_current_music,1
+There's a weird noise coming from my car,none,0
+Resume playback where I stopped,resume_music,1
+Go to the following song,next_track,1
+Pause music on Spotify please,pause_music,1
+Randomize my Spotify playlist,shuffle,1
+Keep this song on loop,repeat,1
+Which song is Spotify on right now?,get_current_music,1
+I really should call my parents more often,none,0
+Keep the Spotify music going,resume_music,1
+Switch songs on Spotify,next_track,1
+Stop the music temporarily,pause_music,1
+Turn on random play on Spotify,shuffle,1
+Set Spotify to loop this song,repeat,1
+What is the current song playing on Spotify?,get_current_music,1
+My subscription just auto-renewed,none,0
+Get my songs playing again on Spotify,resume_music,1
+Play the next song on Spotify,next_track,1
+Pause the current song,pause_music,1
+Play my music in a random order,shuffle,1
+Loop this track please,repeat,1
+What's the current song playing?,get_current_music,1
+It's been raining all week here,none,0
+Continue the music I was listening to,resume_music,1
+Forward this track on Spotify,next_track,1
+Stop Spotify playback,pause_music,1
+Switch to shuffle on Spotify,shuffle,1
+Repeat my current track please,repeat,1
+Tell me the name of the song that's on,get_current_music,1
+I lost track of time at the grocery store,none,0
+Resume my music please,resume_music,1
+Jump to the next track on Spotify,next_track,1
+Hold my music please,pause_music,1
+Turn on shuffle mode,shuffle,1
+Enable looping on Spotify,repeat,1
+What song is on Spotify right now?,get_current_music,1
+The line at the post office was endless,none,0
+Start the music again,resume_music,1
+Skip to the next one please,next_track,1
+Pause my music on Spotify,pause_music,1
+Shuffle my music queue on Spotify,shuffle,1
+Set this song on loop please,repeat,1
+What's the name of the current track?,get_current_music,1
+I think I left the stove on,none,0
+Play Spotify from where it stopped,resume_music,1
+Play next song on my Spotify,next_track,1
+Hold Spotify for a moment,pause_music,1
+Randomize the order of my songs,shuffle,1
+Make this song repeat on Spotify,repeat,1
+Which track is playing on Spotify now?,get_current_music,1
+My room is way too hot at night,none,0
+Get the track going again on Spotify,resume_music,1
+Next song on my playlist,next_track,1
+Mute and pause my Spotify,pause_music,1
+Mix up the order of my playlist,shuffle,1
+Keep looping the current song,repeat,1
+What's currently on Spotify for me?,get_current_music,1
+I need to fix that leaky faucet,none,0
+Resume my Spotify playlist please,resume_music,1
+Skip the current song on Spotify,next_track,1
+Pause my current track please,pause_music,1
+Put my playlist in random order,shuffle,1
+Replay this song on Spotify,repeat,1
+Tell me the song name please,get_current_music,1
+The bookshelf I ordered finally arrived,none,0
+Bring my music back on Spotify,resume_music,1
+Go to next track on Spotify,next_track,1
+Temporarily stop my Spotify,pause_music,1
+Randomize my current queue,shuffle,1
+Keep this playing on loop,repeat,1
+What track is on at the moment?,get_current_music,1
+I really want to try that new restaurant,none,0
+Start playing Spotify for me again,resume_music,1
+Move to the next track now,next_track,1
+Please pause what's on Spotify,pause_music,1
+Turn shuffle on for my Spotify,shuffle,1
+Repeat the current song please,repeat,1
+Which track is currently on Spotify?,get_current_music,1
+I should probably clean my room,none,0
+Unpause my music please,resume_music,1
+Can you go ahead to the next song?,next_track,1
+Put Spotify on pause please,pause_music,1
+Randomize my playlist on Spotify,shuffle,1
+Play this song again and again,repeat,1
+Let me know what song is playing,get_current_music,1
+I've been meaning to call the bank,none,0
+Continue my Spotify music please,resume_music,1
+Change track on Spotify,next_track,1
+Freeze the music for a moment,pause_music,1
+Enable random mode on Spotify,shuffle,1
+Loop the song I'm currently on,repeat,1
+What's the current music on Spotify?,get_current_music,1
+My grocery list keeps growing,none,0
+Resume playing my music,resume_music,1
+Skip this track please,next_track,1
+Pause the song I'm on,pause_music,1
+Shuffle the songs for me,shuffle,1
+Repeat this song please,repeat,1
+Can you check what's playing on Spotify?,get_current_music,1
+I forgot to set my alarm last night,none,0
+Play my Spotify from where I left off,resume_music,1
+Go to the following track please,next_track,1
+Stop the current song for now,pause_music,1
+Mix up my Spotify songs,shuffle,1
+Turn repeat mode on for Spotify,repeat,1
+What music is playing on Spotify?,get_current_music,1
+The remote control batteries died,none,0
+Keep my music playing on Spotify,resume_music,1
+Play what comes next on Spotify,next_track,1
+Pause Spotify playback now,pause_music,1
+Put songs in random order on Spotify,shuffle,1
+Keep the song looping please,repeat,1
+Tell me what song Spotify has on,get_current_music,1
+I've been sneezing all morning,none,0
+Get my Spotify session going again,resume_music,1
+Play the upcoming track on Spotify,next_track,1
+Halt my music on Spotify,pause_music,1
+Randomize my queue on Spotify,shuffle,1
+Set the current song to loop,repeat,1
+What's the song name on Spotify?,get_current_music,1
+I need to replace the batteries in the remote,none,0
+Resume the song I had paused,resume_music,1
+Jump ahead to the next song,next_track,1
+Stop and pause my Spotify music,pause_music,1
+Start shuffle mode on my Spotify,shuffle,1
+Replay the current track please,repeat,1
+What song am I on right now?,get_current_music,1
+I should book my flights earlier next time,none,0
+Can you resume Spotify for me?,resume_music,1
+I need to schedule a haircut this week,none,0
+Play my paused Spotify track,resume_music,1
+My Wi-Fi keeps dropping the connection,none,0
+Get the music running again on Spotify,resume_music,1
+I accidentally sent an email to the wrong person,none,0
+Bring back my Spotify music,resume_music,1
+I need to renew my driver's license,none,0
+Start up Spotify again please,resume_music,1
+My workout clothes need washing,none,0
+Resume my Spotify music now,resume_music,1
+I keep losing my lip balm,none,0
+Let my music keep playing on Spotify,resume_music,1
+I need to find a new dentist,none,0
+Unpause my Spotify playlist,resume_music,1
+My shoelace broke this morning,none,0
+Keep playing my Spotify session,resume_music,1
+I forgot to pay my electricity bill,none,0
+Play my music again on Spotify,resume_music,1
+I've been putting off that phone call,none,0
+Skip to the next track now,next_track,1
+I need to get a new umbrella,none,0
+Move me to the next song,next_track,1
+The cafeteria ran out of my usual meal,none,0
+Play the next thing in my queue,next_track,1
+I need to get my bike tire fixed,none,0
+Skip this track for me,next_track,1
+My USB hub stopped working suddenly,none,0
+Change to the following track,next_track,1
+I should return that package I bought online,none,0
+Go to the next one please,next_track,1
+I forgot my umbrella at home,none,0
+Play the song that comes after this,next_track,1
+My office chair squeaks constantly,none,0
+Skip ahead to the next track,next_track,1
+I need to book a table for dinner tonight,none,0
+Move ahead one song on Spotify,next_track,1
+I can't decide what to watch tonight,none,0
+Next song in my queue please,next_track,1
+My travel mug lid keeps cracking,none,0
+Can you play the next song for me?,next_track,1
+I need to find a new podcast to follow,none,0
+Advance to the next track on Spotify,next_track,1
+I've been procrastinating all week,none,0
+Jump to the next song now,next_track,1
+My cat has been extra clingy today,none,0
+Skip to the following song please,next_track,1
+I should really stretch more often,none,0
+Play the next track right now,next_track,1
+The vending machine ate my money again,none,0
+Move to the following song on Spotify,next_track,1
+I spilled soup on my shirt at lunch,none,0
+Play what's next on my Spotify,next_track,1
+I need to replace my old mattress,none,0
+Skip the song and go forward,next_track,1
+My headphones have a broken hinge,none,0
+Put the next track on Spotify,next_track,1
+I left my badge at home and got locked out,none,0
+Play the following track for me,next_track,1
+I need to get a new welcome mat,none,0
+Pause my Spotify music for now,pause_music,1
+I need to schedule a vet appointment,none,0
+Please stop the music momentarily,pause_music,1
+My shower drain keeps clogging,none,0
+Halt the playback on Spotify,pause_music,1
+I forgot to pick up my dry cleaning,none,0
+Cut the music for a moment,pause_music,1
+I've been staring at the same page for an hour,none,0
+Freeze the song on Spotify,pause_music,1
+I need to call my insurance company,none,0
+Stop Spotify for a sec,pause_music,1
+I forgot to bring my lunch to work,none,0
+Can you put Spotify on hold?,pause_music,1
+The Wi-Fi in my building keeps dropping,none,0
+Interrupt the music please,pause_music,1
+I lost a button off my coat,none,0
+Pause the Spotify playback for me,pause_music,1
+I need to find a new route to work,none,0
+Stop music for just a moment,pause_music,1
+My USB hub stopped working,none,0
+Can you freeze my Spotify playback?,pause_music,1
+I need to stock up on printer paper,none,0
+Pause my music right away,pause_music,1
+I haven't reorganized my desk in months,none,0
+Hold Spotify music please,pause_music,1
+The restaurant got my order wrong again,none,0
+Stop the track I'm on please,pause_music,1
+I should get my eyes checked soon,none,0
+Pause Spotify right now,pause_music,1
+I keep running out of sticky notes,none,0
+Put the music on hold please,pause_music,1
+I need to book a flight soon,none,0
+Cut off the music on Spotify,pause_music,1
+I lost my favorite pen somewhere,none,0
+Can you shuffle my Spotify queue?,shuffle,1
+I need to take out the trash again,none,0
+Play songs randomly on Spotify,shuffle,1
+My headphones keep disconnecting,none,0
+Randomize the playback on Spotify,shuffle,1
+I really want a new desk lamp,none,0
+Start random play on my Spotify,shuffle,1
+I can't decide what to have for lunch,none,0
+Mix my playlist up please,shuffle,1
+It took forever to find parking today,none,0
+Play my songs out of order,shuffle,1
+My coworker microwaves fish in the office,none,0
+Turn on random mode for my Spotify,shuffle,1
+I've been meaning to read that book,none,0
+Activate shuffle playback please,shuffle,1
+The printer at work is broken again,none,0
+Randomize my track order on Spotify,shuffle,1
+I dropped my phone and cracked the screen,none,0
+Switch my Spotify to random order,shuffle,1
+It's been so cold this week,none,0
+Shuffle my tracks for me please,shuffle,1
+I keep losing my lip gloss,none,0
+Mix up the playback order on Spotify,shuffle,1
+I need to update my resume,none,0
+Play randomly from my playlist,shuffle,1
+My desk is an absolute mess right now,none,0
+Randomize what plays next on Spotify,shuffle,1
+I need to renew my driver's license soon,none,0
+Turn shuffle on for my music now,shuffle,1
+My alarm went off an hour late,none,0
+Enable random song order on Spotify,shuffle,1
+I need to get a new backpack soon,none,0
+Start shuffling my Spotify songs,shuffle,1
+I've been craving sushi all week,none,0
+Shuffle the order of my Spotify queue,shuffle,1
+My notebook is running out of pages,none,0
+Play my songs in shuffled order,shuffle,1
+I really need to paint my bedroom,none,0
+Activate random playback on my Spotify,shuffle,1
+I should go through my old clothes,none,0
+Put my Spotify songs on random play,shuffle,1
+I've been putting off doing my laundry,none,0
+Play this song on loop please,repeat,1
+I need to buy more dishwasher tablets,none,0
+Make Spotify keep replaying this track,repeat,1
+My office gets too cold in the afternoon,none,0
+Keep playing this song over and over,repeat,1
+I forgot to pick up the prescription,none,0
+Set Spotify to play this song again,repeat,1
+I have a pile of magazines to recycle,none,0
+Put this track on infinite repeat,repeat,1
+I need to call back that missed number,none,0
+Loop this song for me please,repeat,1
+My battery pack needs replacing,none,0
+Replay the current song on Spotify,repeat,1
+I should really set up autopay for bills,none,0
+Keep this track playing repeatedly,repeat,1
+I need to get a new phone case,none,0
+Set this to play on repeat please,repeat,1
+I forgot to respond to that email,none,0
+Make this song loop on Spotify,repeat,1
+I should really learn to cook more,none,0
+Enable song looping for this track,repeat,1
+My pen ran out of ink mid-sentence,none,0
+Loop my current song on Spotify,repeat,1
+I need to schedule a haircut soon,none,0
+Set the track to keep replaying,repeat,1
+My travel mug case cracked again,none,0
+Make Spotify repeat this track,repeat,1
+I've been staring at my screen too long,none,0
+Put this on a repeat loop on Spotify,repeat,1
+I can't find my headphones anywhere,none,0
+Replay the song I'm on right now,repeat,1
+I should go to bed earlier tonight,none,0
+Enable repeat for the current track please,repeat,1
+The bus came early and I missed it,none,0
+Keep looping what's playing on Spotify,repeat,1
+I need to clean out my bag,none,0
+Loop the song indefinitely please,repeat,1
+I burnt my hand on the oven rack,none,0
+Tell me the name of the song playing,get_current_music,1
+I left my lunch at home today,none,0
+What's the song that's currently on?,get_current_music,1
+I've been sneezing all afternoon,none,0
+Can you name the song on Spotify?,get_current_music,1
+I need to find a gift for my friend,none,0
+What track has Spotify got on right now?,get_current_music,1
+I lost my transit card this morning,none,0
+Name the song playing on Spotify,get_current_music,1
+I'm running out of shampoo,none,0
+What is Spotify playing right now?,get_current_music,1
+My office chair keeps squeaking,none,0
+Can you tell me the track name?,get_current_music,1
+I need to find a new podcast,none,0
+What song does Spotify have on?,get_current_music,1
+My indoor thermometer has wrong readings,none,0
+Tell me the current song name on Spotify,get_current_music,1
+I need to replace my bathroom mirror,none,0
+What is currently playing for me?,get_current_music,1
+I've been meaning to donate old clothes,none,0
+Can you read the current song for me?,get_current_music,1
+I need to buy a new welcome mat,none,0
+What song is Spotify on right now?,get_current_music,1
+I forgot to cancel that subscription,none,0
+Tell me what Spotify is playing,get_current_music,1
+I should really defrost my freezer,none,0
+What's the name of the track that's on?,get_current_music,1
+My earbuds case stopped charging,none,0
+Let me know the current Spotify song,get_current_music,1
+I should really organize my downloads folder,none,0
+What song name is showing on Spotify?,get_current_music,1
+My window blinds are stuck halfway,none,0
+Give me the name of the current song,get_current_music,1
+I need to stock up on printer paper,none,0

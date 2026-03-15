@@ -35,35 +35,47 @@ def ner_treat_training_csv(reader):
 
 #CAT Training
 
-def create_cat_model(intention, not_intention):
+def create_cat_model(intention_list):
     nlp = spacy.blank("en")
-    textcat = nlp.add_pipe("textcat")
-    textcat.add_label(intention)
-    textcat.add_label(not_intention)
+    textcat = nlp.add_pipe("textcat_multilabel")
+    for intention in intention_list:
+        textcat.add_label(intention)
     return nlp
 
 #the scripts bellow can be used to train a already trained NLP, just give the nlp of the loaded NLP
 
-def cat_treat_training_csv(intention, not_intention, reader):
+
+def cat_treat_training_csv(intention_list, reader):
+    print("Entering CSV treating... ")
     cat_training_data = []
     for row in reader:
-        for row in reader:
+        for intention in intention_list:
+
             phrase = row["phrase"]
+            csv_intention = row["intention"]
             score = row["score"]
-            if score == "0":
-                cat_training_data.append((phrase, {"cats": {intention: 0.0, not_intention: 1.0}}))
-            else:
-                cat_training_data.append((phrase, {"cats": {intention: 1.0, not_intention: 0.0}}))
-        return cat_training_data
+
+            cats = {}
+            for intention in intention_list:
+                cats[intention] = 1.0 if intention == csv_intention and score == 1 else 0.0
+            
+            cats["none"] = 1.0 if score == 0 else 0.0
+
+            cat_training_data.append((phrase, {"cats": cats}))
+    print("Finished CSV treating")
+    return cat_training_data
 
 def cat_model_training(nlp, cat_training_data, number_of_interactions):
 
+    print("Starting model training")
     optimizer = nlp.begin_training()
     losses = {}
     fixed_percentage = 100 / number_of_interactions 
     not_int_current_percentage = 0
 
     #main training
+
+    not_freezed_counter = 0
 
     for _ in range(number_of_interactions):
         random.shuffle(cat_training_data)
@@ -80,56 +92,55 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
     print("Training completed!")
     return nlp
 
-def test_cat_model(intention, nlp, true_phrase, false_phrase):
+def test_cat_model(nlp, reader):
 
     #the true and false phrase are phrases that you want to test if the NLP will correctly recognize
     #Returns the probability of truness and the result of the test
+    
+    test_results = {}
 
-    for _ in range(2):
+    for row in reader:
+        intention = row["intention"]
+        true_phrase = row["true_phrase"]
+        false_phrase = row["false_phrase"]
+        true_doc = nlp(true_phrase)
+        false_doc = nlp(false_phrase)
 
         #True phrase verification
-        doc = nlp(true_phrase)
-        true_phrase_probability = doc.cats[intention]
+        true_phrase_probability = true_doc.cats[intention]
         if true_phrase_probability > 0.5:
             success_test_1 = True
         else:
             success_test_1 = False
-        
+            
         #False phrase verification
-        doc = nlp(false_phrase)
-        false_phrase_probability = doc.cats[intention]
+        false_phrase_probability = false_doc.cats[intention]
         if false_phrase_probability > 0.5:
             success_test_2 = False
         else:
             success_test_2 = True
+
+        test_results[intention] = {
+            "test_1" : success_test_1,
+            "test_1_prob" : true_phrase_probability,
+            "test_2" : success_test_2,
+            "test_2_prob" : false_phrase_probability
+        }
     
-    return true_phrase_probability, success_test_1, false_phrase_probability, success_test_2
+    return test_results
 
-def train_blank_model(intention, not_intention, number_of_interactions, training_csv_path, true_phrase, false_phrase):
+def train_model(intention_list, number_of_interactions, training_csv_path, testing_csv_path):
 
-    reader = open_csv(training_csv_path)
-    nlp = create_cat_model(intention, not_intention)
-    cat_training_data = cat_treat_training_csv(intention, not_intention, reader)
+    training_reader = open_csv(training_csv_path)
+    nlp = create_cat_model(intention_list)
+    cat_training_data = cat_treat_training_csv(intention_list, training_reader)
     trained_nlp = cat_model_training(nlp, cat_training_data, number_of_interactions)
     
-    true_phrase_probability, success_test_1, false_phrase_probability, success_test_2 = test_cat_model(intention, trained_nlp, true_phrase, false_phrase)
+    testing_reader = open_csv(testing_csv_path)
+    test_results = test_cat_model(trained_nlp, testing_reader)
 
-    print(f"Test 1: {success_test_1}, Prob: {true_phrase_probability} | Test 2: {success_test_2}, Prob: {false_phrase_probability}")
-
-    question_save_model = int(input("Save model? 1- Yes | Anything else- NO: "))
-    if question_save_model == 1:
-        model_name = str(input("Please type the model name: "))
-        save_model(trained_nlp, model_name)
-
-def train_model(nlp, intention, not_intention, number_of_interactions, training_csv_path, true_phrase, false_phrase):
-
-    reader = open_csv(training_csv_path)
-    cat_training_data = cat_treat_training_csv(intention, not_intention, reader)
-    trained_nlp = cat_model_training(nlp, cat_training_data, number_of_interactions)
-    
-    true_phrase_probability, success_test_1, false_phrase_probability, success_test_2 = test_cat_model(intention, trained_nlp, true_phrase, false_phrase)
-
-    print(f"Test 1: {success_test_1}, Prob: {true_phrase_probability} | Test 2: {success_test_2}, Prob: {false_phrase_probability}")
+    for intention, results in test_results.items():
+        print(f"Test 1: {results['test_1']}, Prob: {results['test_1_prob']} | Test 2: {results['test_2']}, Prob: {results['test_2_prob']}")
 
     question_save_model = int(input("Save model? 1- Yes | Anything else- NO: "))
     if question_save_model == 1:
@@ -137,6 +148,15 @@ def train_model(nlp, intention, not_intention, number_of_interactions, training_
         save_model(trained_nlp, model_name)
 
 #dev template
-csv_path = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_resume_phrases.csv"
+training_csv = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_all_intentions.csv"
+testing_csv = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_test_phrases.csv"
+intention_list = [
+    "resume_music",
+    "next_track",
+    "pause_music",
+    "shuffle",
+    "repeat",
+    "get_current_music"
+]
 
-train_blank_model("play_music", "not_play_music", 200, csv_path, "please play my music", "What day is today?")
+train_model(intention_list, 50, training_csv, testing_csv)

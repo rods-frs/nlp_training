@@ -1,0 +1,7 @@
+{
+  "labels":[
+    "pause_music",
+    "not_pause_music"
+  ],
+  "threshold":0.5
+}
