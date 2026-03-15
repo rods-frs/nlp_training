@@ -4,7 +4,6 @@ from spacy.training import Example
 from os import system
 from time import sleep
 import csv
-import threading
 import random
 
 #main functions
@@ -95,7 +94,7 @@ def ner_test(nlp, t_csv, ):
 def cat_analytics():
     pass
 
-def b_cat_model(it, n_it):
+def create_cat_model(it, n_it):
     nlp = spacy.blank("en")
     textcat = nlp.add_pipe("textcat")
     textcat.add_label(it)
@@ -159,9 +158,9 @@ def b_check_cat_nlp(intention, trained_nlp, t_text, f_text):
 
 #testing
 
-def testing1(it1, n_it1, interations, t_text, f_text, cat_csv_path):
+def cat_main(it1, n_it1, interations, t_text, f_text, cat_csv_path):
 
-    b_nlp = b_cat_model(it1, n_it1)
+    b_nlp = create_cat_model(it1, n_it1)
 
     reader = open_csv(cat_csv_path)
 
@@ -210,6 +209,6 @@ def ner_main(label, csv_path, t_csv, n_int):
 
 if __name__ == "__main__":
     #ner_main("PROGRAM", "/home/morsdesuper/Documents/GitHub/nlp_training/program_phrases_mixed.csv", "csv.csv", 250)
-    testing1("open_program", "not_open_program", 250, "Could you please open up Word?", "What time is it?", "/home/morsdesuper/Documents/GitHub/nlp_training/update_t_data.csv")
+    cat_main("open_program", "not_open_program", 250, "Could you please open up Word?", "What time is it?", "/home/morsdesuper/Documents/GitHub/nlp_training/update_t_data.csv")
 
     
