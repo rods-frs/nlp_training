@@ -1,0 +1,12 @@
+{
+  "labels":[
+    "resume_music",
+    "next_track",
+    "pause_music",
+    "shuffle",
+    "repeat",
+    "get_current_music",
+    "none"
+  ],
+  "threshold":0.5
+}

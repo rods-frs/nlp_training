@@ -40,28 +40,23 @@ def create_cat_model(intention_list):
     textcat = nlp.add_pipe("textcat_multilabel")
     for intention in intention_list:
         textcat.add_label(intention)
+    textcat.add_label("none") 
     return nlp
 
-#the scripts bellow can be used to train a already trained NLP, just give the nlp of the loaded NLP
-
-
 def cat_treat_training_csv(intention_list, reader):
-    print("Entering CSV treating... ")
+    print("Entering CSV treating...")
     cat_training_data = []
-    for row in reader:
+    for row in reader:  # ← removed the redundant outer intention loop
+        phrase = row["phrase"]
+        csv_intention = row["intention"]
+        score = int(row["score"])  # ← cast to int
+
+        cats = {}
         for intention in intention_list:
+            cats[intention] = 1.0 if intention == csv_intention and score == 1 else 0.0
+        cats["none"] = 1.0 if score == 0 else 0.0
 
-            phrase = row["phrase"]
-            csv_intention = row["intention"]
-            score = row["score"]
-
-            cats = {}
-            for intention in intention_list:
-                cats[intention] = 1.0 if intention == csv_intention and score == 1 else 0.0
-            
-            cats["none"] = 1.0 if score == 0 else 0.0
-
-            cat_training_data.append((phrase, {"cats": cats}))
+        cat_training_data.append((phrase, {"cats": cats}))
     print("Finished CSV treating")
     return cat_training_data
 
@@ -73,21 +68,35 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
     fixed_percentage = 100 / number_of_interactions 
     not_int_current_percentage = 0
 
+    patience = 10
+    last_lost = float("inf")
+
     #main training
 
-    not_freezed_counter = 0
-
     for _ in range(number_of_interactions):
+
+        if patience <= 0:
+            print("Patience limit reached! Ending training... ")
+            break
+
         random.shuffle(cat_training_data)
+
+        losses = {}
+
         for text, annotations in cat_training_data:
             doc = nlp.make_doc(text)
             example = Example.from_dict(doc, annotations)
-            nlp.update([example], sgd=optimizer, losses=losses)
+            nlp.update([example], sgd=optimizer, losses=losses, drop=0.2)
 
+        current_loss = losses["textcat_multilabel"]
         system("clear")
         int_current_percentage = int(not_int_current_percentage)
-        print(f"NLP training {int_current_percentage}% completed")
+        print(f"NLP training {int_current_percentage}% completed | Current loss count: {current_loss}")
         not_int_current_percentage += fixed_percentage
+        
+        if current_loss - last_lost < 0.001:
+            patience += 1
+        else: patience -= 1
 
     print("Training completed!")
     return nlp
@@ -140,10 +149,10 @@ def train_model(intention_list, number_of_interactions, training_csv_path, testi
     test_results = test_cat_model(trained_nlp, testing_reader)
 
     for intention, results in test_results.items():
-        print(f"Test 1: {results['test_1']}, Prob: {results['test_1_prob']} | Test 2: {results['test_2']}, Prob: {results['test_2_prob']}")
+        print(f"Intention: {intention}, Test 1: {results['test_1']}, Prob: {results['test_1_prob']} | Test 2: {results['test_2']}, Prob: {results['test_2_prob']}")
 
-    question_save_model = int(input("Save model? 1- Yes | Anything else- NO: "))
-    if question_save_model == 1:
+    question_save_model = str(input("Save model? Y/N: "))
+    if question_save_model == "y":
         model_name = str(input("Please type the model name: "))
         save_model(trained_nlp, model_name)
 
@@ -159,4 +168,4 @@ intention_list = [
     "get_current_music"
 ]
 
-train_model(intention_list, 50, training_csv, testing_csv)
+train_model(intention_list, 100, training_csv, testing_csv)
