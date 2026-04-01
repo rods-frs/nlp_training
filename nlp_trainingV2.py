@@ -89,11 +89,115 @@ def ner_treat_training_csv(reader):
         training_data = []
         for row in reader:
             phrase = row["phrase"]
-            pass
+            highlight_object = row["highlight"]
+
+            highlight_lengh = len(highlight_object)
+            highlight_start = phrase.find(highlight_object)
+            highlight_end = highlight_lengh + highlight_start
+
+            training_data.append(
+                (phrase, {"entities": [(highlight_start, highlight_end, "MUSIC_NAME")]})
+            )
         return training_data
     except Exception as e:
         print(f"Error in NER treat training CSV: {e}")
         return []
+
+def ner_model_training(nlp, number_of_interactions, training_data):
+
+    #Patience limit removed because the NER model training losses was too variable, making the patience stop the training too early
+
+    try:
+        print("Starting model training")
+        nlp.initialize()
+        losses = {}
+
+        #patience = 30
+        #last_lost = float("inf")
+
+        #main training
+
+        current_iteration = 0
+        percentage = 100 / number_of_interactions
+        current_percentage = 0
+
+        for _ in range(number_of_interactions):
+
+            current_iteration += 1
+
+            #if patience <= 0:
+            #    print("Patience limit reached! Ending training... ")
+            #    break
+
+            random.shuffle(training_data)
+
+            losses = {}
+
+            for text, annotations in training_data:
+                doc = nlp.make_doc(text)
+                example = Example.from_dict(doc, annotations)
+            nlp.update([example], losses=losses, drop=0.2)
+
+            display_perc = int(current_percentage)
+            system("cls")
+            print(f"Training {display_perc}% completed")
+
+            current_percentage += percentage
+            current_loss = losses["ner"]
+            print(f"Current loss count: {current_loss:.6f}")
+            
+            #if current_loss < last_lost:
+            #    last_lost = current_loss
+            #    patience = 10
+            #else:
+            #    patience -= 1
+            print(f"Iteration number {current_iteration}")
+
+        print("Training completed!")
+        return nlp
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return None
+
+def ner_model_testing(nlp, reader):
+
+    failures = 0
+    fail_highlights = []
+
+    for row in reader:
+        phrase = row["phrase"]
+        highlight = row["highlight"]
+        doc = nlp(phrase)
+
+        for entity in doc.ents:
+            if entity.text != highlight:
+                failures += 1
+                fail_highlights.append(highlight)
+    
+    return failures, fail_highlights
+
+def ner_main(number_of_interactions, training_csv_path, testing_csv_path):
+    
+    nlp = create_ner_model("MUSIC_NAME")
+    training_data = ner_treat_training_csv(open_csv(training_csv_path))
+    trained_nlp = ner_model_training(nlp, number_of_interactions, training_data)
+    if trained_nlp is None:
+        print("Training failed, aborting.")
+        return
+    failures, fail_list = ner_model_testing(trained_nlp, open_csv(testing_csv_path))
+
+    fail_index = 0
+
+    for fails in fail_list:
+        fail_index += 1
+        print(f"Fail number {fail_index} | Fail: {fails}")
+    print(f"Total failures: {failures}")
+    
+    save_nlp = input("Want to save the model? Type anything if yes | Press ENTER without typing anything if no\n>> ")
+
+    if save_nlp:
+        trained_nlp.to_disk("NER_MODEL")
 
 #CAT Training
 
@@ -150,7 +254,6 @@ def cat_treat_training_csv(intention_list, reader):
         print(f"Training failed! Error: {e}")
         return []
     
-
 def cat_model_training(nlp, cat_training_data, number_of_interactions):
     """
     Trains the text categorization model using the provided training data.
@@ -167,8 +270,6 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
         print("Starting model training")
         optimizer = nlp.begin_training()
         losses = {}
-        fixed_percentage = 100 / number_of_interactions 
-        not_int_current_percentage = 0
 
         patience = 10
         last_lost = float("inf")
@@ -191,10 +292,7 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
                 nlp.update([example], sgd=optimizer, losses=losses, drop=0.2)
 
             current_loss = losses["textcat_multilabel"]
-            system("clear")
-            int_current_percentage = int(not_int_current_percentage)
-            print(f"NLP training {int_current_percentage}% completed | Current loss count: {current_loss}")
-            not_int_current_percentage += fixed_percentage
+            print(f"Current loss count: {current_loss}")
             
             if current_loss - last_lost < 0.001:
                 patience += 1
@@ -256,7 +354,7 @@ def test_cat_model(nlp, reader):
         print(f"Error testing model: {e}")
         return {}
 
-def train_model(intention_list, number_of_interactions, training_csv_path, testing_csv_path):
+def cat_main(intention_list, number_of_interactions, training_csv_path, testing_csv_path):
     """
     Orchestrates the complete model training and testing workflow.
 
@@ -300,6 +398,8 @@ Development template: Example usage of the train_model function.
 Loads training and testing data from CSV files, trains a model on Spotify-related intentions,
 and optionally saves the trained model.
 """
+
+"""
 try:
     training_csv = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_all_intentions.csv"
     testing_csv = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_test_phrases.csv"
@@ -315,3 +415,6 @@ try:
     train_model(intention_list, 100, training_csv, testing_csv)
 except Exception as e:
     print(f"Error in main execution: {e}")
+"""
+
+ner_main(5000, "ner_train_augmented.csv", "ner_test_improved.csv")
