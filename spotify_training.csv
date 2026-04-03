@@ -663,3 +663,78 @@ Play Cruel Summer by Taylor Swift,play_music,1
 Can you put on Vampire by Olivia Rodrigo?,play_music,1
 Play the new Billie Eilish song,play_music,1
 I want to listen to Wish You Were Here,play_music,1
+Play my Discover Weekly playlist,play_playlist,1
+Can you put on my workout playlist?,play_playlist,1
+Play the chill vibes playlist on Spotify,play_playlist,1
+Start my morning routine playlist,play_playlist,1
+Put on my road trip playlist please,play_playlist,1
+Play the Hot 100 playlist,play_playlist,1
+Can you start my focus playlist?,play_playlist,1
+Play the Today's Top Hits playlist,play_playlist,1
+Put on my sleep playlist please,play_playlist,1
+Start my gym playlist on Spotify,play_playlist,1
+Play the liked songs playlist,play_playlist,1
+Can you play my late night playlist?,play_playlist,1
+Put on the study playlist,play_playlist,1
+Play my favorites playlist,play_playlist,1
+Start the party mix playlist please,play_playlist,1
+Can you play the RapCaviar playlist?,play_playlist,1
+Put on my coding playlist,play_playlist,1
+Play the evening wind down playlist,play_playlist,1
+Start my Running playlist on Spotify,play_playlist,1
+Can you play the Jazz Classics playlist?,play_playlist,1
+Play my Sunday morning playlist,play_playlist,1
+Put on the deep focus playlist please,play_playlist,1
+Start the dinner playlist,play_playlist,1
+Can you play my throwbacks playlist?,play_playlist,1
+Play the All Out 80s playlist on Spotify,play_playlist,1
+Find the song Blinding Lights on Spotify,search_music,1
+Search for Hotel California please,search_music,1
+Can you look up Shape of You?,search_music,1
+Find me Bohemian Rhapsody by Queen,search_music,1
+Search Spotify for Levitating by Dua Lipa,search_music,1
+Can you find As It Was by Harry Styles?,search_music,1
+Look up Cruel Summer on Spotify,search_music,1
+Search for Bad Guy by Billie Eilish,search_music,1
+Find the song Watermelon Sugar,search_music,1
+Can you search for Heather by Conan Gray?,search_music,1
+Look up Redbone on Spotify please,search_music,1
+Search for something by Frank Ocean,search_music,1
+Find me a song called Espresso,search_music,1
+Can you find Wish You Were Here?,search_music,1
+Search Spotify for Heat Waves,search_music,1
+Look up Paranoid Android by Radiohead,search_music,1
+Find the song Anti-Hero please,search_music,1
+Can you search for Neon by John Mayer?,search_music,1
+Search for Africa by Toto on Spotify,search_music,1
+Find me Running Up That Hill,search_music,1
+Look up Seven Nation Army please,search_music,1
+Can you find Lose Yourself by Eminem?,search_music,1
+Search for Superstition by Stevie Wonder,search_music,1
+Find me a song by Mac Miller,search_music,1
+Can you look up Stairway to Heaven?,search_music,1
+Find the workout playlist on Spotify,search_playlist,1
+Search for a chill vibes playlist,search_playlist,1
+Can you look up the study playlist?,search_playlist,1
+Find me a jazz playlist please,search_playlist,1
+Search Spotify for a lo-fi playlist,search_playlist,1
+Can you find a focus playlist?,search_playlist,1
+Look up the RapCaviar playlist,search_playlist,1
+Find a road trip playlist on Spotify,search_playlist,1
+Search for a sleep playlist please,search_playlist,1
+Can you find a playlist for working out?,search_playlist,1
+Look up Discover Weekly on Spotify,search_playlist,1
+Find me a 90s playlist,search_playlist,1
+Search for a cooking playlist please,search_playlist,1
+Can you find a playlist for studying?,search_playlist,1
+Look up the Hot 100 playlist,search_playlist,1
+Find a morning playlist on Spotify,search_playlist,1
+Search for a party playlist please,search_playlist,1
+Can you find a playlist with calm music?,search_playlist,1
+Look up a playlist for long drives,search_playlist,1
+Find me the All Out 80s playlist,search_playlist,1
+Search Spotify for a dinner party playlist,search_playlist,1
+Can you find a deep focus playlist?,search_playlist,1
+Find a playlist for rainy days,search_playlist,1
+Search for the Jazz Classics playlist,search_playlist,1
+Look up a playlist with indie songs please,search_playlist,1

@@ -1,0 +1,16 @@
+{
+  "labels":[
+    "resume_music",
+    "next_track",
+    "pause_music",
+    "shuffle",
+    "repeat",
+    "get_current_music",
+    "play_music",
+    "play_playlist",
+    "search_music",
+    "search_playlist",
+    "none"
+  ],
+  "threshold":0.5
+}

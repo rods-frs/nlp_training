@@ -29,10 +29,11 @@ def open_csv(path):
         list: A list of dictionaries, where each dictionary represents a row in the CSV.
               Returns an empty list if an error occurs.
     """
-    print(path)
     try:
         with open(path, newline="") as f: 
+            print(f"Successfully readed: {path}")
             return list(csv.DictReader(f)) 
+
     except Exception as e:
         print(f"Error opening CSV file: {e}")
         return []
@@ -75,7 +76,7 @@ def create_ner_model(ner_label):
         print(f"Error creating NER model: {e}")
         return None
 
-def ner_treat_training_csv(reader):
+def ner_treat_training_csv(label, reader):
     """
     Processes training data for NER from a CSV reader. (Currently incomplete)
 
@@ -96,7 +97,7 @@ def ner_treat_training_csv(reader):
             highlight_end = highlight_lengh + highlight_start
 
             training_data.append(
-                (phrase, {"entities": [(highlight_start, highlight_end, "MUSIC_NAME")]})
+                (phrase, {"entities": [(highlight_start, highlight_end, label)]})
             )
         return training_data
     except Exception as e:
@@ -104,54 +105,56 @@ def ner_treat_training_csv(reader):
         return []
 
 def ner_model_training(nlp, number_of_interactions, training_data):
-
-    #Patience limit removed because the NER model training losses was too variable, making the patience stop the training too early
-
     try:
         print("Starting model training")
         nlp.initialize()
         losses = {}
 
-        #patience = 30
-        #last_lost = float("inf")
-
-        #main training
+        patience = 30
+        last_avg = float("inf")
+        loss_history = []
+        window = 20
 
         current_iteration = 0
         percentage = 100 / number_of_interactions
         current_percentage = 0
 
         for _ in range(number_of_interactions):
-
             current_iteration += 1
 
-            #if patience <= 0:
-            #    print("Patience limit reached! Ending training... ")
-            #    break
+            if patience <= 0:
+                print("Patience limit reached! Ending training...")
+                break
 
             random.shuffle(training_data)
-
             losses = {}
 
             for text, annotations in training_data:
                 doc = nlp.make_doc(text)
                 example = Example.from_dict(doc, annotations)
-            nlp.update([example], losses=losses, drop=0.2)
+                nlp.update([example], losses=losses, drop=0.2)
+
+            current_loss = losses["ner"]
+            loss_history.append(current_loss)
+
+            if len(loss_history) > window:
+                loss_history.pop(0)
+
+            avg_loss = sum(loss_history) / len(loss_history)
 
             display_perc = int(current_percentage)
-            system("cls")
-            print(f"Training {display_perc}% completed")
-
             current_percentage += percentage
-            current_loss = losses["ner"]
-            print(f"Current loss count: {current_loss:.6f}")
-            
-            #if current_loss < last_lost:
-            #    last_lost = current_loss
-            #    patience = 10
-            #else:
-            #    patience -= 1
-            print(f"Iteration number {current_iteration}")
+
+            system("clear")
+            print(f"Training {display_perc}% | Iteration {current_iteration}")
+            print(f"Loss: {current_loss:.6f} | Avg({window}): {avg_loss:.6f} | Patience: {patience}")
+
+            if len(loss_history) == window:
+                if last_avg - avg_loss < 0.0001:
+                    patience -= 1
+                #else: #uncomment for a better model but more time training
+                #    patience = 30
+                last_avg = avg_loss
 
         print("Training completed!")
         return nlp
@@ -159,7 +162,7 @@ def ner_model_training(nlp, number_of_interactions, training_data):
         import traceback
         traceback.print_exc()
         return None
-
+    
 def ner_model_testing(nlp, reader):
 
     failures = 0
@@ -177,10 +180,10 @@ def ner_model_testing(nlp, reader):
     
     return failures, fail_highlights
 
-def ner_main(number_of_interactions, training_csv_path, testing_csv_path):
+def ner_main(label, number_of_interactions, training_csv_path, testing_csv_path):
     
-    nlp = create_ner_model("MUSIC_NAME")
-    training_data = ner_treat_training_csv(open_csv(training_csv_path))
+    nlp = create_ner_model(label)
+    training_data = ner_treat_training_csv(label, open_csv(training_csv_path))
     trained_nlp = ner_model_training(nlp, number_of_interactions, training_data)
     if trained_nlp is None:
         print("Training failed, aborting.")
@@ -197,7 +200,8 @@ def ner_main(number_of_interactions, training_csv_path, testing_csv_path):
     save_nlp = input("Want to save the model? Type anything if yes | Press ENTER without typing anything if no\n>> ")
 
     if save_nlp:
-        trained_nlp.to_disk("NER_MODEL")
+        trained_nlp.to_disk("NER_MODEL_2")
+        print("Model saved!")
 
 #CAT Training
 
@@ -233,7 +237,6 @@ def cat_treat_training_csv(intention_list, reader):
     Returns:
         list: A list of tuples, each containing (phrase, {"cats": cats_dict}).
     """
-    print("Entering CSV treating...")
     cat_training_data = []
     try:
         for row in reader:  # ← removed the redundant outer intention loop
@@ -247,7 +250,6 @@ def cat_treat_training_csv(intention_list, reader):
             cats["none"] = 1.0 if score == 0 else 0.0
 
             cat_training_data.append((phrase, {"cats": cats}))
-        print("Finished CSV treating")
         return cat_training_data
     
     except Exception as e:
@@ -267,23 +269,22 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
         nlp: The trained spaCy model, or None if an error occurs.
     """
     try:
-        print("Starting model training")
+        print("Starting model training, this can take a while.")
         optimizer = nlp.begin_training()
         losses = {}
 
         patience = 10
-        last_lost = float("inf")
-
-        #main training
+        last_loss = float("inf")
+        current_loss = float("inf")
+        first_epoch = True
 
         for _ in range(number_of_interactions):
-
             if patience <= 0:
-                print("Patience limit reached! Ending training... ")
+                print("Patience limit reached! Ending training...")
                 break
 
             random.shuffle(cat_training_data)
-
+            last_loss = current_loss
             losses = {}
 
             for text, annotations in cat_training_data:
@@ -292,11 +293,21 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
                 nlp.update([example], sgd=optimizer, losses=losses, drop=0.2)
 
             current_loss = losses["textcat_multilabel"]
-            print(f"Current loss count: {current_loss}")
-            
-            if current_loss - last_lost < 0.001:
-                patience += 1
-            else: patience -= 1
+            system("clear")
+
+            if first_epoch:
+                print(f"Loss: {current_loss:.4f} | Last: N/A | Patience: {patience}")
+                first_epoch = False
+
+            elif last_loss - current_loss < 0.001:
+                patience -= 1                
+                print(f"Loss: {current_loss:.4f} | Last: {last_loss:.4f} | Patience: {patience}")
+                print("Not enough difference between errors, -1 patience point")
+                patience -= 1
+
+            else: 
+                print(f"Loss: {current_loss:.4f} | Last: {last_loss:.4f} | Patience: {patience}")
+                
 
         print("Training completed!")
         return nlp
@@ -385,6 +396,7 @@ def cat_main(intention_list, number_of_interactions, training_csv_path, testing_
         for intention, results in test_results.items():
             print(f"Intention: {intention}, Test 1: {results['test_1']}, Prob: {results['test_1_prob']} | Test 2: {results['test_2']}, Prob: {results['test_2_prob']}")
 
+        save_model(trained_nlp, "spotify-v2")
         question_save_model = str(input("Save model? Y/N: "))
         if question_save_model == "y":
             model_name = str(input("Please type the model name: "))
@@ -401,20 +413,25 @@ and optionally saves the trained model.
 
 """
 try:
-    training_csv = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_all_intentions.csv"
-    testing_csv = "/home/rodrigo/Documents/GitHub/nlp_training/spotify_test_phrases.csv"
+    training_csv = "spotify_training.csv"
+    testing_csv = "spotify_test.csv"
     intention_list = [
         "resume_music",
         "next_track",
         "pause_music",
         "shuffle",
         "repeat",
-        "get_current_music"
+        "get_current_music",
+        "play_music",
+        "play_playlist",
+        "search_music",
+        "search_playlist"
     ]
 
-    train_model(intention_list, 100, training_csv, testing_csv)
+    cat_main(intention_list, 1000, training_csv, testing_csv)
 except Exception as e:
     print(f"Error in main execution: {e}")
+
 """
 
-ner_main(5000, "ner_train_augmented.csv", "ner_test_improved.csv")
+ner_main("playlist_name", 5000, "playlist_ner_train.csv", "playlist_ner_test.csv")

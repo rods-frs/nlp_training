@@ -1,8 +1,0 @@
-{
-  "labels":[
-    "play_music",
-    "not_play_music"
-  ],
-  "threshold":0.0,
-  "positive_label":null
-}
