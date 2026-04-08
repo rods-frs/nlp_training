@@ -1,0 +1,11 @@
+phrase,word,label
+tocar Linkin Park,Linkin Park,ARTISTA
+tocar Metallica,Metallica,ARTISTA
+tocar Iron Maiden,Iron Maiden,ARTISTA
+tocar Sepultura,Sepultura,ARTISTA
+pausar musica,pausar,ACAO
+parar musica,parar,ACAO
+pular musica,pular,ACAO
+tocar Taylor Swift,Taylor Swift,ARTISTA
+tocar Beyonce,Beyonce,ARTISTA
+tocar Rihanna,Rihanna,ARTISTA

@@ -1,7 +1,6 @@
 #packages
 import spacy
 from spacy.training import Example
-from spacy.scorer import Scorer
 from os import system
 from time import sleep
 import csv
@@ -162,36 +161,22 @@ def ner_model_training(nlp, number_of_interactions, training_data):
         traceback.print_exc()
         return None
     
-def ner_model_testing(nlp, reader, label):
-    """
-    Tests the trained NER model using test data and computes evaluation metrics.
+def ner_model_testing(nlp, reader):
 
-    Args:
-        nlp: The trained spaCy model.
-        reader: List of dictionaries containing test data.
-        label: The NER label to evaluate.
+    failures = 0
+    fail_highlights = []
 
-    Returns:
-        dict: Dictionary of evaluation scores (precision, recall, F1, etc.).
-    """
-    try:
-        scorer = Scorer()
-        for row in reader:
-            phrase = row["phrase"]
-            highlight = row["highlight"]
-            highlight_start = phrase.find(highlight)
-            highlight_end = highlight_start + len(highlight)
-            
-            doc = nlp(phrase)
-            gold_entities = [(highlight_start, highlight_end, label)]
-            example = Example.from_dict(doc, {"entities": gold_entities})
-            scorer.score_spans(example, "ner")
-        
-        scores = scorer.scores
-        return scores
-    except Exception as e:
-        print(f"Error in NER testing: {e}")
-        return {}
+    for row in reader:
+        phrase = row["phrase"]
+        highlight = row["highlight"]
+        doc = nlp(phrase)
+
+        for entity in doc.ents:
+            if entity.text != highlight:
+                failures += 1
+                fail_highlights.append(highlight)
+    
+    return failures, fail_highlights
 
 def ner_main(label, number_of_interactions, training_csv_path, testing_csv_path):
     
@@ -201,11 +186,14 @@ def ner_main(label, number_of_interactions, training_csv_path, testing_csv_path)
     if trained_nlp is None:
         print("Training failed, aborting.")
         return
-    scores = ner_model_testing(trained_nlp, open_csv(testing_csv_path), label)
+    failures, fail_list = ner_model_testing(trained_nlp, open_csv(testing_csv_path))
 
-    print("NER Evaluation Scores:")
-    for key, value in scores.items():
-        print(f"{key}: {value:.4f}")
+    fail_index = 0
+
+    for fails in fail_list:
+        fail_index += 1
+        print(f"Fail number {fail_index} | Fail: {fails}")
+    print(f"Total failures: {failures}")
     
     save_nlp = input("Want to save the model? Type anything if yes | Press ENTER without typing anything if no\n>> ")
 
@@ -325,48 +313,54 @@ def cat_model_training(nlp, cat_training_data, number_of_interactions):
         print(f"Error during model training: {e}")
         return None
 
-def test_cat_model(nlp, reader, intention_list):
+def test_cat_model(nlp, reader):
     """
-    Tests the trained text categorization model and computes evaluation metrics.
+    Tests the trained text categorization model using test data from a CSV reader.
 
     Args:
         nlp: The trained spaCy model.
-        reader: List of dictionaries containing test data.
-        intention_list: List of intention labels.
+        reader: A CSV reader object containing test data with columns: intention, true_phrase, false_phrase.
 
     Returns:
-        dict: Dictionary of evaluation scores for textcat_multilabel.
+        dict: A dictionary with test results for each intention, including success flags and probabilities.
     """
     try:
-        examples = []
+        #the true and false phrase are phrases that you want to test if the NLP will correctly recognize
+        #Returns the probability of truness and the result of the test
+        
+        test_results = {}
+
         for row in reader:
             intention = row["intention"]
             true_phrase = row["true_phrase"]
             false_phrase = row["false_phrase"]
-            
-            # Create gold cats for true phrase: intention=1, others=0, none=0
-            true_cats = {int: 1.0 if int == intention else 0.0 for int in intention_list}
-            true_cats["none"] = 0.0
-            
-            # Create gold cats for false phrase: all=0, none=1
-            false_cats = {int: 0.0 for int in intention_list}
-            false_cats["none"] = 1.0
-            
-            # Create examples
             true_doc = nlp(true_phrase)
-            true_example = Example.from_dict(true_doc, {"cats": true_cats})
-            examples.append(true_example)
-            
             false_doc = nlp(false_phrase)
-            false_example = Example.from_dict(false_doc, {"cats": false_cats})
-            examples.append(false_example)
+
+            #True phrase verification
+            true_phrase_probability = true_doc.cats[intention]
+            if true_phrase_probability > 0.5:
+                success_test_1 = True
+            else:
+                success_test_1 = False
+                
+            #False phrase verification
+            false_phrase_probability = false_doc.cats[intention]
+            if false_phrase_probability > 0.5:
+                success_test_2 = False
+            else:
+                success_test_2 = True
+
+            test_results[intention] = {
+                "test_1" : success_test_1,
+                "test_1_prob" : true_phrase_probability,
+                "test_2" : success_test_2,
+                "test_2_prob" : false_phrase_probability
+            }
         
-        scorer = Scorer()
-        scorer.score_cats(examples, "cats", labels=intention_list + ["none"])
-        scores = scorer.scores
-        return scores
+        return test_results
     except Exception as e:
-        print(f"Error in CAT testing: {e}")
+        print(f"Error testing model: {e}")
         return {}
 
 def cat_main(intention_list, number_of_interactions, training_csv_path, testing_csv_path):
@@ -395,11 +389,10 @@ def cat_main(intention_list, number_of_interactions, training_csv_path, testing_
             return
         
         testing_reader = open_csv(testing_csv_path)
-        scores = test_cat_model(trained_nlp, testing_reader, intention_list)
+        test_results = test_cat_model(trained_nlp, testing_reader)
 
-        print("CAT Evaluation Scores:")
-        for key, value in scores.items():
-            print(f"{key}: {value:.4f}")
+        for intention, results in test_results.items():
+            print(f"Intention: {intention}, Test 1: {results['test_1']}, Prob: {results['test_1_prob']} | Test 2: {results['test_2']}, Prob: {results['test_2_prob']}")
 
         save_model(trained_nlp, "spotify-v2")
         question_save_model = str(input("Save model? Y/N: "))
@@ -416,6 +409,7 @@ Loads training and testing data from CSV files, trains a model on Spotify-relate
 and optionally saves the trained model.
 """
 
+"""
 try:
     training_csv = "spotify_training.csv"
     testing_csv = "spotify_test.csv"
@@ -432,10 +426,10 @@ try:
         "search_playlist"
     ]
 
-    cat_main(intention_list, 10, training_csv, testing_csv)
+    cat_main(intention_list, 1000, training_csv, testing_csv)
 except Exception as e:
     print(f"Error in main execution: {e}")
 
+"""
 
-
-# ner_main("playlist_name", 10, "playlist_ner_train.csv", "playlist_ner_test.csv")
+ner_main("playlist_name", 5000, "playlist_ner_train.csv", "playlist_ner_test.csv")

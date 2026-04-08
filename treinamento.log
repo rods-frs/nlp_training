@@ -1,0 +1,101 @@
+2026-04-08 13:39:03,394 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:39:03,632 | ERROR | Error while opening the CSV: [Errno 2] No such file or directory: 'teste_ner.csv'
+2026-04-08 13:39:03,632 | ERROR | Error while treating the data from the CSV: cannot unpack non-iterable NoneType object
+2026-04-08 13:39:03,632 | INFO | Iniciando treinamento...
+2026-04-08 13:40:12,365 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:40:12,593 | ERROR | Error while opening the CSV: [Errno 2] No such file or directory: 'teste_ner.csv'
+2026-04-08 13:40:12,593 | ERROR | Error while treating the data from the CSV: cannot unpack non-iterable NoneType object
+2026-04-08 13:40:12,594 | INFO | Iniciando treinamento...
+2026-04-08 13:41:48,161 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:41:48,376 | ERROR | Error while opening the CSV: [Errno 2] No such file or directory: 'teste_ner.csv'
+2026-04-08 13:41:48,377 | ERROR | Error while treating the data from the CSV: exceptions must derive from BaseException
+2026-04-08 13:41:48,377 | INFO | Iniciando treinamento...
+2026-04-08 13:42:40,362 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:42:40,594 | INFO | Readed /home/rsilva/Documents/nlp_training/Training V3/teste_ner.csv!
+2026-04-08 13:42:40,596 | INFO | Iniciando treinamento...
+2026-04-08 13:42:40,762 | INFO | Created vocabulary
+2026-04-08 13:42:40,763 | INFO | Finished initializing nlp object
+2026-04-08 13:43:44,428 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:43:44,671 | INFO | Readed /home/rsilva/Documents/nlp_training/Training V3/teste_ner.csv!
+2026-04-08 13:43:44,672 | INFO | Iniciando treinamento...
+2026-04-08 13:43:44,838 | INFO | Created vocabulary
+2026-04-08 13:43:44,838 | INFO | Finished initializing nlp object
+2026-04-08 13:43:45,007 | INFO | Epoch number 1 | 99 to go.
+2026-04-08 13:43:45,097 | INFO | Epoch number 2 | 98 to go.
+2026-04-08 13:43:45,192 | INFO | Epoch number 3 | 97 to go.
+2026-04-08 13:43:45,282 | INFO | Epoch number 4 | 96 to go.
+2026-04-08 13:43:45,373 | INFO | Epoch number 5 | 95 to go.
+2026-04-08 13:43:45,461 | INFO | Epoch number 6 | 94 to go.
+2026-04-08 13:43:45,551 | INFO | Epoch number 7 | 93 to go.
+2026-04-08 13:43:45,642 | INFO | Epoch number 8 | 92 to go.
+2026-04-08 13:43:45,732 | INFO | Epoch number 9 | 91 to go.
+2026-04-08 13:43:45,821 | INFO | Epoch number 10 | 90 to go.
+2026-04-08 13:43:45,909 | INFO | Epoch number 11 | 89 to go.
+2026-04-08 13:43:46,000 | INFO | Epoch number 12 | 88 to go.
+2026-04-08 13:43:46,089 | INFO | Epoch number 13 | 87 to go.
+2026-04-08 13:43:46,178 | INFO | Epoch number 14 | 86 to go.
+2026-04-08 13:43:46,269 | INFO | Epoch number 15 | 85 to go.
+2026-04-08 13:43:46,358 | INFO | Epoch number 16 | 84 to go.
+2026-04-08 13:43:46,445 | INFO | Epoch number 17 | 83 to go.
+2026-04-08 13:43:46,532 | INFO | No relevant change. Patience lost 1 point, 2 points left
+2026-04-08 13:43:46,532 | INFO | Epoch number 18 | 82 to go.
+2026-04-08 13:43:46,617 | INFO | Epoch number 19 | 81 to go.
+2026-04-08 13:43:46,707 | INFO | Epoch number 20 | 80 to go.
+2026-04-08 13:43:46,793 | INFO | Epoch number 21 | 79 to go.
+2026-04-08 13:43:46,886 | INFO | Epoch number 22 | 78 to go.
+2026-04-08 13:43:46,975 | INFO | Epoch number 23 | 77 to go.
+2026-04-08 13:43:47,065 | INFO | No relevant change. Patience lost 1 point, 1 points left
+2026-04-08 13:43:47,065 | INFO | Epoch number 24 | 76 to go.
+2026-04-08 13:43:47,151 | INFO | Epoch number 25 | 75 to go.
+2026-04-08 13:43:47,242 | INFO | Epoch number 26 | 74 to go.
+2026-04-08 13:43:47,330 | INFO | Epoch number 27 | 73 to go.
+2026-04-08 13:43:47,416 | INFO | Epoch number 28 | 72 to go.
+2026-04-08 13:43:47,502 | INFO | Epoch number 29 | 71 to go.
+2026-04-08 13:43:47,588 | INFO | No relevant change. Patience lost 1 point, 0 points left
+2026-04-08 13:43:47,588 | INFO | Epoch number 30 | 70 to go.
+2026-04-08 13:43:47,588 | INFO | Patience limit reached! Finishing training...
+2026-04-08 13:43:47,588 | INFO | Training finished! Returning training NLP...
+2026-04-08 13:46:41,130 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:46:41,355 | INFO | Readed /home/rsilva/Documents/nlp_training/Training V3/teste_ner.csv!
+2026-04-08 13:46:41,356 | INFO | Iniciando treinamento...
+2026-04-08 13:46:41,357 | ERROR | Error while training the NER model: name 'ogging' is not defined
+2026-04-08 13:47:04,601 | INFO | Iniciando tratamento de dados...
+2026-04-08 13:47:04,830 | INFO | Readed /home/rsilva/Documents/nlp_training/Training V3/teste_ner.csv!
+2026-04-08 13:47:04,831 | INFO | Iniciando treinamento...
+2026-04-08 13:47:04,996 | INFO | Created vocabulary
+2026-04-08 13:47:04,996 | INFO | Finished initializing nlp object
+2026-04-08 13:47:05,153 | INFO | Epoch number 1 | 99 to go.
+2026-04-08 13:47:05,254 | INFO | Epoch number 2 | 98 to go.
+2026-04-08 13:47:05,347 | INFO | Epoch number 3 | 97 to go.
+2026-04-08 13:47:05,435 | INFO | Epoch number 4 | 96 to go.
+2026-04-08 13:47:05,526 | INFO | Epoch number 5 | 95 to go.
+2026-04-08 13:47:05,615 | INFO | Epoch number 6 | 94 to go.
+2026-04-08 13:47:05,705 | INFO | Epoch number 7 | 93 to go.
+2026-04-08 13:47:05,793 | INFO | Epoch number 8 | 92 to go.
+2026-04-08 13:47:05,881 | INFO | Epoch number 9 | 91 to go.
+2026-04-08 13:47:05,971 | INFO | Epoch number 10 | 90 to go.
+2026-04-08 13:47:06,060 | INFO | Epoch number 11 | 89 to go.
+2026-04-08 13:47:06,150 | INFO | Epoch number 12 | 88 to go.
+2026-04-08 13:47:06,236 | INFO | Epoch number 13 | 87 to go.
+2026-04-08 13:47:06,324 | INFO | Epoch number 14 | 86 to go.
+2026-04-08 13:47:06,416 | INFO | Epoch number 15 | 85 to go.
+2026-04-08 13:47:06,505 | INFO | Epoch number 16 | 84 to go.
+2026-04-08 13:47:06,587 | INFO | Epoch number 17 | 83 to go.
+2026-04-08 13:47:06,672 | INFO | No relevant change. Patience lost 1 point, 2 points left
+2026-04-08 13:47:06,673 | INFO | Epoch number 18 | 82 to go.
+2026-04-08 13:47:06,762 | INFO | Epoch number 19 | 81 to go.
+2026-04-08 13:47:06,855 | INFO | Epoch number 20 | 80 to go.
+2026-04-08 13:47:06,944 | INFO | Epoch number 21 | 79 to go.
+2026-04-08 13:47:07,031 | INFO | Epoch number 22 | 78 to go.
+2026-04-08 13:47:07,119 | INFO | Epoch number 23 | 77 to go.
+2026-04-08 13:47:07,214 | INFO | No relevant change. Patience lost 1 point, 1 points left
+2026-04-08 13:47:07,214 | INFO | Epoch number 24 | 76 to go.
+2026-04-08 13:47:07,316 | INFO | Epoch number 25 | 75 to go.
+2026-04-08 13:47:07,404 | INFO | Epoch number 26 | 74 to go.
+2026-04-08 13:47:07,491 | INFO | Epoch number 27 | 73 to go.
+2026-04-08 13:47:07,573 | INFO | Epoch number 28 | 72 to go.
+2026-04-08 13:47:07,666 | INFO | Epoch number 29 | 71 to go.
+2026-04-08 13:47:07,764 | INFO | No relevant change. Patience lost 1 point, 0 points left
+2026-04-08 13:47:07,764 | INFO | Epoch number 30 | 70 to go.
+2026-04-08 13:47:07,764 | INFO | Patience limit reached! Finishing training...
+2026-04-08 13:47:07,764 | INFO | Training finished! Returning training NLP...
