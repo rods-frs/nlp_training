@@ -5,6 +5,10 @@ from spacy.training import Example
 import csv
 import logging
 import random
+import nltk
+import nlpaug.augmenter.word as naw
+
+#libraries configuration
 
 logging.basicConfig(
     level=logging.INFO,
@@ -15,6 +19,9 @@ logging.basicConfig(
     ]
 )
 
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+aug = naw.SynonymAug(aug_src='wordnet')
 
 #Basic scripts
 
@@ -41,17 +48,19 @@ def save_docbin(docbin, save_path):
         logging.error(f"Error while saving DocBin to {save_path}: {e}")
 
 def get_doc_labels(db, vocab):
-    labels = []
-    for doc in db.get_docs(vocab):
-        for ent in doc.ents:
-            if ent.label_ not in labels:
-                labels.append(ent.label_)
-    return labels
+    try:
+        labels = []
+        for doc in db.get_docs(vocab):
+            for ent in doc.ents:
+                if ent.label_ not in labels:
+                    labels.append(ent.label_)
+        return labels
+    except Exception as e:
+        logging.error(f"Error while getting the labels from the doc: {e}")
 
 #Data treatment for NER and CAT models
 
 def treat_ner_csv(nlp, csv_path):
-
     try:
         logging.debug("Opening DocBin")
         ner_db = DocBin()
@@ -63,7 +72,7 @@ def treat_ner_csv(nlp, csv_path):
         for column, expected_column in zip(csv_columns, expected_columns):
             if column != expected_column:
                 raise ValueError(f"Column name expected: {expected_column}, got {column}")
-            
+
         for row in raw_csv:
 
             logging.debug("Extracting data from CSV")
@@ -72,31 +81,48 @@ def treat_ner_csv(nlp, csv_path):
             phrase_label = row["label"]
 
             doc = nlp.make_doc(phrase)
-
             word_lengh = len(word)
             word_start = phrase.find(word)
             word_end = word_lengh + word_start
 
+            aug_phrase = aug.augment(phrase, stopwords=[word])[0]
+            aug_doc = nlp.make_doc(aug_phrase)
+            aug_word_start = aug_phrase.find(word)
+            aug_word_end = word_lengh + aug_word_start
+
             logging.debug("Creating span")
             span = doc.char_span(word_start, word_end, label=phrase_label)
+            aug_span = aug_doc.char_span(aug_word_start, aug_word_end, label=phrase_label)
 
             if span is not None:
                 doc.ents = [span]
                 ner_db.add(doc)
             else:
-                logging.warning(f"Falha ao alinhar palavra {word}")
+                logging.error(f"Falha ao alinhar palavra {word} da phrase original")
 
-        return ner_db
+            if aug_span is not None:
+                aug_doc.ents = [aug_span]
+                ner_db.add(aug_doc)
+
+            else:
+                logging.error(f"Falha ao alinhar palavra {word} da phrase augumentada")
+
+        return ner_db, nlp
 
     except Exception as e:
         logging.error(f"Error while treating the data from the CSV: {e}")
 
-def treat_cat_csv(nlp, csv_path)
+def treat_cat_csv(nlp, csv_path): #incomplete
+    
+    cat_db = DocBin()
+
+    expected_columns = ["phrase", "intention"]
+
     pass
 
 #Training models
 
-def train_ner_model(db, iterations, window, patience):
+def train_ner_model(nlp, db, iterations, window, patience):
 
     try:
 
@@ -133,7 +159,7 @@ def train_ner_model(db, iterations, window, patience):
             loss_history.append(losses['ner'])
             if len(loss_history) > window:
                 current_average = sum(loss_history) / len(loss_history)
-                if not last_average:
+                if last_average is None:
                     logging.debug("First average detected! Creating last_average")
                     last_average = current_average
                 else:
@@ -155,3 +181,27 @@ def train_ner_model(db, iterations, window, patience):
     except Exception as e:
         logging.error(f"Error while training the NER model: {e}")
         
+#Model testing
+
+def test_ner_model():
+    pass
+
+#Main 
+
+def main_ner_training(CSV_FILE, iterations, window, patience, test_phrases):
+    nlp_init = create_blank_model()
+    DB_FILE = treat_ner_csv(nlp_init, CSV_FILE)
+
+    trained_nlp = train_ner_model(DB_FILE, iterations, window, patience)
+
+    print("\n" + "="*40)
+    print(" NER MODEL RESULTS ")
+    print("="*40)
+    
+
+    for phrase in test_phrases:
+        doc = trained_nlp(phrase)
+        entidades = [(ent.text, ent.label_) for ent in doc.ents]
+        print(f"Input: '{phrase}'")
+        print(f"Detected: {entidades if entidades else 'No entity found'}")
+        print("-" * 40)
