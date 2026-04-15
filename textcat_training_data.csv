@@ -1,0 +1,20 @@
+phrase,intention
+2,
+start_computer,
+weather_inquiry,
+turn on the pc,start_computer
+boot up my computer,start_computer
+start the desktop,start_computer
+can you start my computer,start_computer
+power on my pc,start_computer
+wake up the computer,start_computer
+initialize my machine,start_computer
+start my pc please,start_computer
+what is the weather like today,weather_inquiry
+is it going to rain,weather_inquiry
+how hot is it outside,weather_inquiry
+tell me the weather forecast,weather_inquiry
+do I need an umbrella today,weather_inquiry
+what's the temperature right now,weather_inquiry
+is it sunny outside,weather_inquiry
+will it snow tomorrow,weather_inquiry
